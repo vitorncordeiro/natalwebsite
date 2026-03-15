@@ -5,6 +5,7 @@ import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { useLanguage } from "@/contexts/language-context"
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 
@@ -49,6 +50,7 @@ const projects = [
 export function Projects() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.3 })
   const { ref: carouselRef, isVisible: carouselVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.05 })
+  const { t } = useLanguage()
 
   return (
     <section id="work" className="py-24 sm:py-32 bg-muted/30">
@@ -61,10 +63,10 @@ export function Projects() {
         >
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-px bg-primary" />
-            <span className="text-sm font-medium text-primary uppercase tracking-wider">Portfolio</span>
+            <span className="text-sm font-medium text-primary uppercase tracking-wider">{t.projects.label}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
-            Selected Work
+            {t.projects.title}
           </h2>
         </div>
         

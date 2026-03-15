@@ -3,9 +3,11 @@
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { useLanguage } from "@/contexts/language-context"
 
 export function CTA() {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>({ threshold: 0.3 })
+  const { t } = useLanguage()
 
   return (
     <section ref={ref} id="contact" className="py-24 md:py-32 bg-accent text-accent-foreground">
@@ -16,7 +18,7 @@ export function CTA() {
               isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
             }`}
           >
-            Ready to build something that actually works?
+            {t.cta.title}
           </h2>
           
           <p 
@@ -24,7 +26,7 @@ export function CTA() {
               isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
             }`}
           >
-            Tell me what you need. I'll respond in less than 24 hours with an honest assessment of whether I can help.
+            {t.cta.description}
           </p>
           
           <div 
@@ -37,7 +39,7 @@ export function CTA() {
               className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-base font-medium group"
               onClick={() => window.open("https://wa.me/5541987144723", "_blank")}
             >
-              Start a conversation
+              {t.cta.button}
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
 
@@ -48,7 +50,7 @@ export function CTA() {
               isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
             }`}
           >
-            No forms with 20 fields. No "schedule a call to learn more." Just a direct line.
+            {t.cta.note}
           </p>
         </div>
       </div>

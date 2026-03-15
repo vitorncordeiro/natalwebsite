@@ -1,33 +1,12 @@
 "use client"
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
-
-const steps = [
-  {
-    number: "01",
-    title: "Discovery",
-    description: "Understanding your business, your processes, and your technical needs.",
-  },
-  {
-    number: "02", 
-    title: "Architecture",
-    description: "Designing a scalable system that supports both your current operations and future growth.",
-  },
-  {
-    number: "03",
-    title: "Development",
-    description: "Building the solution using modern technologies and engineering best practices.",
-  },
-  {
-    number: "04",
-    title: "Deployment",
-    description: "Launching, testing, and ensuring stability and performance.",
-  },
-]
+import { useLanguage } from "@/contexts/language-context"
 
 export function Process() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.3 })
   const { ref: stepsRef, isVisible: stepsVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
+  const { t } = useLanguage()
 
   return (
     <section className="py-24 sm:py-32">
@@ -40,15 +19,15 @@ export function Process() {
         >
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-px bg-primary" />
-            <span className="text-sm font-medium text-primary uppercase tracking-wider">Process</span>
+            <span className="text-sm font-medium text-primary uppercase tracking-wider">{t.process.label}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
-            How I work
+            {t.process.title}
           </h2>
         </div>
         
         <div ref={stepsRef} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => (
+          {t.process.steps.map((step, index) => (
             <div 
               key={step.title} 
               className={`relative transition-all duration-500 ease-out ${
@@ -57,7 +36,7 @@ export function Process() {
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               {/* Connection Line */}
-              {index < steps.length - 1 && (
+              {index < t.process.steps.length - 1 && (
                 <div 
                   className={`hidden lg:block absolute top-8 left-full w-full h-px bg-border z-0 transition-all duration-700 origin-left ${
                     stepsVisible ? "scale-x-100" : "scale-x-0"

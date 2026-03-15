@@ -1,23 +1,17 @@
 "use client"
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
-
-const items = [
-  "Websites",
-  "Automation Systems", 
-  "AI Infrastructure",
-  "Custom Integrations",
-  "Performance Focused",
-]
+import { useLanguage } from "@/contexts/language-context"
 
 export function TrustStrip() {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>({ threshold: 0.5 })
+  const { t } = useLanguage()
 
   return (
     <section ref={ref} className="border-y border-border bg-muted/30 py-8 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 lg:gap-x-16">
-          {items.map((item, index) => (
+          {t.trustStrip.map((item, index) => (
             <div 
               key={item} 
               className={`flex items-center gap-3 transition-all duration-500 ease-out ${

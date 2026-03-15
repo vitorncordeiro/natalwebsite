@@ -3,17 +3,12 @@
 import Link from "next/link"
 import { Github, Linkedin, Twitter } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { useLanguage } from "@/contexts/language-context"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
   const { ref, isVisible } = useScrollAnimation<HTMLElement>({ threshold: 0.1 })
-
-  const navigation = [
-    { name: "Services", href: "#services" },
-    { name: "Projects", href: "#work" },
-    { name: "Process", href: "#about" },
-    { name: "Contact", href: "#contact" },
-  ]
+  const { t } = useLanguage()
 
   const social = [
     { name: "GitHub", href: "#", icon: Github },
@@ -32,10 +27,10 @@ export function Footer() {
             }`}
           >
             <Link href="/" className="text-xl font-bold tracking-tight">
-              Digital<span className="text-primary">.</span>
+              {t.footer.brand}<span className="text-primary">.</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground max-w-sm">
-              Building systems that actually work. Modern websites, automation, and AI infrastructure for businesses that want to operate smarter.
+              {t.footer.description}
             </p>
           </div>
 
@@ -46,10 +41,10 @@ export function Footer() {
             }`}
           >
             <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
-              Navigation
+              {t.footer.navigation.label}
             </h3>
             <ul className="space-y-3">
-              {navigation.map((item, index) => (
+              {t.footer.navigation.items.map((item, index) => (
                 <li 
                   key={item.name}
                   className={`transition-all duration-500 ease-out ${
@@ -75,7 +70,7 @@ export function Footer() {
             }`}
           >
             <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
-              Connect
+              {t.footer.connect.label}
             </h3>
             <div className="flex gap-4">
               {social.map((item, index) => (
@@ -93,7 +88,7 @@ export function Footer() {
               ))}
             </div>
             <p className="mt-6 text-sm text-muted-foreground">
-              hello@digital.dev
+              {t.footer.email}
             </p>
           </div>
         </div>
@@ -105,14 +100,14 @@ export function Footer() {
           }`}
         >
           <p className="text-sm text-muted-foreground">
-            {currentYear} Digital Engineering. All rights reserved.
+            {currentYear} {t.footer.copyright}
           </p>
           <div className="flex gap-6 text-sm text-muted-foreground">
             <Link href="#" className="hover:text-foreground transition-colors">
-              Privacy
+              {t.footer.privacy}
             </Link>
             <Link href="#" className="hover:text-foreground transition-colors">
-              Terms
+              {t.footer.terms}
             </Link>
           </div>
         </div>

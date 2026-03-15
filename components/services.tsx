@@ -1,38 +1,13 @@
 "use client"
 
-import { Globe, Workflow, Brain, Plug } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
-
-const services = [
-  {
-    icon: Globe,
-    number: "01",
-    title: "Websites & Landing Pages",
-    description: "High-performance institutional websites and landing pages designed to convert visitors into customers. Built with modern technologies, optimized for speed, SEO, and scalability.",
-  },
-  {
-    icon: Workflow,
-    number: "02",
-    title: "Automation Systems",
-    description: "Custom automation solutions that reduce manual work and connect the tools your business already uses. From internal workflows to marketing pipelines.",
-  },
-  {
-    icon: Brain,
-    number: "03",
-    title: "AI Infrastructure",
-    description: "Implementation of practical AI systems tailored to your business processes. From AI-powered assistants to automated decision pipelines.",
-  },
-  {
-    icon: Plug,
-    number: "04",
-    title: "Custom Integrations",
-    description: "Integration between APIs, services, and internal tools to create seamless digital ecosystems.",
-  },
-]
+import { useLanguage } from "@/contexts/language-context"
+import { Globe, Workflow, Brain, Plug } from "lucide-react"
 
 export function Services() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.3 })
   const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
+  const { t } = useLanguage()
 
   return (
     <section id="services" className="py-24 sm:py-32 bg-muted/30">
@@ -45,15 +20,15 @@ export function Services() {
         >
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-px bg-primary" />
-            <span className="text-sm font-medium text-primary uppercase tracking-wider">Services</span>
+            <span className="text-sm font-medium text-primary uppercase tracking-wider">{t.services.label}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
-            What I build
+            {t.services.title}
           </h2>
         </div>
         
         <div ref={cardsRef} className="grid sm:grid-cols-2 gap-6 lg:gap-8">
-          {services.map((service, index) => (
+          {t.services.items.map((service, index) => (
             <div
               key={service.title}
               className={`group relative bg-background border border-border rounded-lg p-8 transition-all duration-500 ease-out hover:border-primary/50 hover:shadow-lg ${
@@ -63,10 +38,13 @@ export function Services() {
             >
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center justify-center w-12 h-12 rounded-md bg-primary/10 text-primary">
-                  <service.icon className="w-6 h-6" />
+                  {index === 0 && <Globe className="w-6 h-6" />}
+                  {index === 1 && <Workflow className="w-6 h-6" />}
+                  {index === 2 && <Brain className="w-6 h-6" />}
+                  {index === 3 && <Plug className="w-6 h-6" />}
                 </div>
                 <span className="text-4xl font-bold text-muted-foreground/20 group-hover:text-primary/20 transition-colors">
-                  {service.number}
+                  {String(index + 1).padStart(2, '0')}
                 </span>
               </div>
               

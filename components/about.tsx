@@ -1,9 +1,11 @@
 "use client"
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { useLanguage } from "@/contexts/language-context"
 
 export function About() {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>({ threshold: 0.2 })
+  const { t } = useLanguage()
 
   return (
     <section ref={ref} id="about" className="py-24 sm:py-32">
@@ -16,10 +18,10 @@ export function About() {
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-px bg-primary" />
-              <span className="text-sm font-medium text-primary uppercase tracking-wider">About</span>
+              <span className="text-sm font-medium text-primary uppercase tracking-wider">{t.about.label}</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground text-balance">
-              Technology built with precision.
+              {t.about.title}
             </h2>
           </div>
           
@@ -28,15 +30,11 @@ export function About() {
               isVisible ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
             }`}
           >
-            <p>
-              I'm a technology developer focused on building reliable digital systems for modern businesses.
-            </p>
-            <p>
-              My work combines software engineering, automation, and artificial intelligence to create tools that simplify operations, improve efficiency, and support growth.
-            </p>
-            <p>
-              From high-performance websites to complex automated workflows and AI infrastructure, every project is designed with clarity, scalability, and long-term value in mind.
-            </p>
+            {t.about.content.map((paragraph, index) => (
+              <p key={index}>
+                {paragraph}
+              </p>
+            ))}
           </div>
         </div>
       </div>

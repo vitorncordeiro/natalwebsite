@@ -4,9 +4,11 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useEffect, useState } from "react"
+import { useLanguage } from "@/contexts/language-context"
 
 export function Hero() {
   const [isLoaded, setIsLoaded] = useState(false)
+  const { t } = useLanguage()
 
   useEffect(() => {
     setIsLoaded(true)
@@ -29,7 +31,7 @@ export function Hero() {
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-px bg-primary" />
-                  <span className="text-sm font-medium text-primary uppercase tracking-wider">Digital Engineering</span>
+                  <span className="text-sm font-medium text-primary uppercase tracking-wider">{t.hero.badge}</span>
                 </div>
               </div>
               
@@ -38,8 +40,9 @@ export function Hero() {
                   isLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                 }`}
               >
-                Engineering digital systems that{" "}
-                <span className="text-primary">actually work</span>.
+                {t.hero.title.split(t.hero.titleHighlight)[0]}{" "}
+                <span className="text-primary">{t.hero.titleHighlight}</span>
+                {t.hero.title.split(t.hero.titleHighlight)[1]}
               </h1>
               
               <p 
@@ -47,7 +50,7 @@ export function Hero() {
                   isLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                 }`}
               >
-                I design and build modern websites, automation systems, and AI infrastructure that help businesses operate smarter and scale faster.
+                {t.hero.description}
               </p>
             </div>
             
@@ -58,12 +61,12 @@ export function Hero() {
             >
               <Button size="lg" asChild className="group">
                 <Link href="#contact">
-                  Start a Project
+                  {t.hero.ctaPrimary}
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href="#work">View Work</Link>
+                <Link href="#work">{t.hero.ctaSecondary}</Link>
               </Button>
             </div>
           </div>

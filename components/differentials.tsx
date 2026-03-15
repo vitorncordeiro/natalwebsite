@@ -2,33 +2,12 @@
 
 import { Cpu, TrendingUp, Zap, Target } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
-
-const differentials = [
-  {
-    icon: Cpu,
-    title: "Engineering mindset",
-    description: "Systems are built with structure, not improvisation.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Scalable architecture",
-    description: "Every solution is designed to grow with your business.",
-  },
-  {
-    icon: Zap,
-    title: "Modern technology",
-    description: "Using reliable and up-to-date tools.",
-  },
-  {
-    icon: Target,
-    title: "Focused on results",
-    description: "Technology that actually solves problems.",
-  },
-]
+import { useLanguage } from "@/contexts/language-context"
 
 export function Differentials() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.3 })
   const { ref: itemsRef, isVisible: itemsVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 })
+  const { t } = useLanguage()
 
   return (
     <section className="py-24 sm:py-32">
@@ -41,15 +20,15 @@ export function Differentials() {
         >
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-px bg-primary" />
-            <span className="text-sm font-medium text-primary uppercase tracking-wider">Differentials</span>
+            <span className="text-sm font-medium text-primary uppercase tracking-wider">{t.differentials.label}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
-            Why work with me
+            {t.differentials.title}
           </h2>
         </div>
         
         <div ref={itemsRef} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {differentials.map((item, index) => (
+          {t.differentials.items.map((item, index) => (
             <div 
               key={item.title} 
               className={`group transition-all duration-500 ease-out ${
@@ -63,7 +42,10 @@ export function Differentials() {
                 }`}
                 style={{ transitionDelay: `${index * 100 + 150}ms` }}
               >
-                <item.icon className="w-6 h-6" />
+                {index === 0 && <Cpu className="w-6 h-6" />}
+                {index === 1 && <TrendingUp className="w-6 h-6" />}
+                {index === 2 && <Zap className="w-6 h-6" />}
+                {index === 3 && <Target className="w-6 h-6" />}
               </div>
               
               <h3 className="text-lg font-semibold text-foreground mb-2">
