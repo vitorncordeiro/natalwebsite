@@ -122,7 +122,7 @@ export const translations = {
     
     // Footer
     footer: {
-      brand: "Digital",
+      brand: "Natal Sites",
       description: "Building systems that actually work. Modern websites, automation, and AI infrastructure for businesses that want to operate smarter.",
       navigation: {
         label: "Navigation",
@@ -136,8 +136,8 @@ export const translations = {
       connect: {
         label: "Connect",
       },
-      email: "hello@digital.dev",
-      copyright: "Digital Engineering. All rights reserved.",
+      email: "nattalsites@gmail.com",
+      copyright: "Natal Sites. All rights reserved.",
       privacy: "Privacy",
       terms: "Terms",
     },
@@ -158,7 +158,7 @@ export const translations = {
     },
   },
   
-  pt: {
+  ptbr: {
     // Navigation
     navigation: {
       home: "Início",
@@ -281,7 +281,7 @@ export const translations = {
     
     // Footer
     footer: {
-      brand: "Digital",
+      brand: "Natal Sites",
       description: "Construindo sistemas que realmente funcionam. Websites modernos, automação e infraestrutura de IA para empresas que querem operar de forma mais inteligente.",
       navigation: {
         label: "Navegação",
@@ -295,8 +295,8 @@ export const translations = {
       connect: {
         label: "Conectar",
       },
-      email: "hello@digital.dev",
-      copyright: "Engenharia Digital. Todos os direitos reservados.",
+      email: "nattalsites@gmail.com",
+      copyright: "Natal Sites. Todos os direitos reservados.",
       privacy: "Privacidade",
       terms: "Termos",
     },

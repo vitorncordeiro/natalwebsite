@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, Globe } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { LanguageIcon } from "@/components/language-icon"
 import { useLanguage } from "@/contexts/language-context"
 
 export function Header() {
@@ -56,10 +57,10 @@ export function Header() {
           <button
             type="button"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground hover:text-primary transition-colors"
-            onClick={() => setLanguage(language === "en" ? "pt" : "en")}
+            onClick={() => setLanguage(language === "en" ? "ptbr" : "en")}
             title={`Switch to ${language === "en" ? "Portuguese" : "English"}`}
           >
-            <Globe className="h-5 w-5" />
+            <LanguageIcon className="h-5 w-5" />
           </button>
           <button
             type="button"
@@ -94,10 +95,11 @@ export function Header() {
           <button
             type="button"
             className="inline-flex items-center justify-center rounded-md p-2 text-foreground hover:text-primary transition-colors"
-            onClick={() => setLanguage(language === "en" ? "pt" : "en")}
+            onClick={() => setLanguage(language === "en" ? "ptbr" : "en")}
             title={`Switch to ${language === "en" ? "Portuguese" : "English"}`}
           >
-            <Globe className="h-5 w-5" />
+            <LanguageIcon className="h-5 w-5" />
+            
           </button>
           <Button asChild>
             <Link href="#contact">{t.hero.ctaPrimary}</Link>

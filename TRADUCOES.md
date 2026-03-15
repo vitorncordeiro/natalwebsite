@@ -2,158 +2,156 @@
 
 ## Resumo das Alterações
 
-Este projeto foi refatorado para suportar múltiplos idiomas (Inglês e Português) sem usar bibliotecas externas de tradução.
+Este projeto foi refatorado para suportar múltiplos idiomas (Inglês e Português) usando **URL-based language routing**. Isso permite compartilhar links com a tradução correta pré-selecionada.
 
-## Arquivos Criados
+## ✨ Novo Sistema de URL-Based Language Routing
 
-### 1. `lib/translations.ts`
-Arquivo centralizado contendo todos os textos em inglês e portuguêso com a seguinte estrutura:
-- **hero**: Conteúdo da seção hero
-- **services**: Serviços e descrições
-- **process**: Etapas do processo de trabalho
-- **differentials**: Diferenciais da empresa
-- **projects**: Labels do portfólio
-- **about**: Seção sobre
-- **cta**: Call-to-action
-- **footer**: Rodapé
-- **trustStrip**: Faixa de confiança
-- **navigation**: Itens de navegação
-- **language**: Rótulos de idioma
+A partir de agora, o idioma é definido pela URL:
+- **`/en`** - Acesso em Inglês
+- **`/ptbr`** - Acesso em Português (Brasil)
 
-### 2. `contexts/language-context.tsx`
-Context API customizado que fornece:
-- **LanguageProvider**: Componente wrapper para a aplicação
-- **useLanguage()**: Hook customizado para acessar idioma e traduções
-- Persistência de preferência de idioma em localStorage
-- Prevenção de hidration mismatch
+### Exemplos:
+- `http://localhost:3000/en`
+- `http://localhost:3000/ptbr`
+- `http://localhost:3000/en#services` - Faz scroll para a seção de serviços em inglês
+- `http://localhost:3000/ptbr#services` - Faz scroll para a seção de serviços em português
 
-## Arquivos Modificados
+### Redirecionamento automático
+- Se você acessar `/`, será automaticamente redirecionado para `/en` (idioma padrão)
+- O middleware (`middleware.ts`) gerencia isso automaticamente
 
-### Layout Principal
-- **`app/layout.tsx`**: Envolvido com `<LanguageProvider>` para habilitar suporte multilíngue globalmente
+## Arquivos Principais
 
-### Componentes Refatorados
-Todos os componentes abaixo foram refatorados para usar o hook `useLanguage()` e a tradução centralizada:
+### 1. `middleware.ts` ⭐ NOVO
+Middleware que:
+- Redireciona `/` para `/en` (idioma padrão)
+- Detecta o locale na URL
+- Redireciona automaticamente paths sem locale
 
-1. **`components/header.tsx`**
-   - Adicionado botão de troca de idioma (ícone de globo)
-   - Navegação com itens traduzidos
-   - Botão de CTA traduzido
-   - Disponível em desktop e mobile
+### 2. `app/[locale]/layout.tsx` ⭐ NOVO
+Layout dinâmico que:
+- Recebe o `locale` como parâmetro
+- Passa o locale para o LanguageProvider via `initialLocale`
+- Define o `lang` do HTML corretamente (`en` ou `pt-BR`)
+- Gera estaticamente páginas para `en` e `ptbr`
 
-2. **`components/hero.tsx`**
-   - Badge, título e descrição traduzidos
-   - Botões de CTA traduzidos
+### 3. `app/[locale]/page.tsx` ⭐ NOVO
+Página principal que funciona dentro da estrutura de locale
 
-3. **`components/services.tsx`**
-   - Título da seção e descrições de serviços traduzidos
-   - Números de serviços dinâmicos
+### 4. `lib/translations.ts`
+Arquivo com todas as traduções:
+- Chave `en` - Inglês
+- Chave `ptbr` - Português Brasil
 
-4. **`components/about.tsx`**
-   - Label e título traduzidos
-   - Parágrafos de conteúdo traduzidos
+### 5. `contexts/language-context.tsx` ⭐ ATUALIZADO
+Context API que agora:
+- Aceita `initialLocale` como prop
+- Lee o locale da URL com `usePathname()`
+- Atualiza a URL quando o usuário muda de idioma
+- Sincroniza automaticamente com o URL segment
 
-5. **`components/process.tsx`**
-   - Etapas do processo com números, títulos e descrições traduzidas
+### 6. Hooks Auxiliares ⭐ NOVO
 
-6. **`components/differentials.tsx`**
-   - Diferenciais com títulos e descrições traduzidos
+#### `useLocale()` (`hooks/use-locale.ts`)
+Retorna o locale atual da URL
+```typescript
+const locale = useLocale() // 'en' | 'ptbr'
+```
 
-7. **`components/cta.tsx`**
-   - Título, descrição e botão de CTA traduzidos
+#### `useLocalizedRouter()` (`hooks/use-localized-router.ts`)
+Facilita navegação com locale automático
+```typescript
+const { currentLocale, getLocalizedPath } = useLocalizedRouter()
 
-8. **`components/footer.tsx`**
-   - Marca, descrição, navegação e labels traduzidos
+// Gera path com locale atual
+const path = getLocalizedPath('#services') // /ptbr/#services
 
-9. **`components/trust-strip.tsx`**
-   - Itens da faixa de confiança traduzidos
-
-10. **`components/projects.tsx`**
-    - Label e título da seção traduzidos
+// Gera path com locale específico
+const enPath = getLocalizedPath('#services', 'en') // /en/#services
+```
 
 ## Como Funciona
 
-### 1. Acesso às Traduções
+### Fluxo de Idioma
+1. Usuário acessa `/` → Middleware redireciona para `/en`
+2. Middleware detecta `/en` ou `/ptbr` na URL
+3. Layout passa `initialLocale` para LanguageProvider
+4. LanguageProvider inicializa com aquele locale
+5. Se usuário trocar idioma no header → URL é atualizada → Página re-renderiza
+
+### Exemplo: Trocar de Idioma
 ```typescript
+// No Header
 const { language, setLanguage, t } = useLanguage()
 
-// language: "en" | "pt"
-// setLanguage: função para alterar o idioma
-// t: objeto com todas as traduções do idioma atual
-```
-
-### 2. Uso em Componentes
-```typescript
-<h1>{t.hero.title}</h1>
-<button onClick={() => setLanguage(language === "en" ? "pt" : "en")}>
-  Trocar Idioma
+<button onClick={() => setLanguage(language === "en" ? "ptbr" : "en")}>
+  {/* Ao clicar, a URL muda de /en para /ptbr ou vice-versa */}
 </button>
 ```
 
-### 3. Persistência
-- A preferência de idioma é salva em localStorage
-- Ao recarregar a página, o idioma anterior é restaurado
+## Como Compartilhar Links com Tradução
 
-## Mudanças no Header
+Simplesmente compartilhe a URL com o locale:
+- Para cliente em português: `https://seusite.com/ptbr`
+- Para cliente em inglês: `https://seusite.com/en`
+- Com hash: `https://seusite.com/ptbr#services`
 
-O header agora possui:
-- **Botão de troca de idioma** (ícone Globe)
-  - Desktop: Posicionado próximo ao botão de CTA
-  - Mobile: Posicionado próximo ao menu hamburger
-- **Navegação e CTA traduzidos**
-- Funcionalidade de toggle entre EN e PT
+## Estrutura de Pastas
+
+```
+app/
+├── [locale]/                  # Pasta dinâmica para locale
+│   ├── layout.tsx            # Layout com acesso ao locale param
+│   └── page.tsx              # Página principal
+└── globals.css
+
+contexts/
+└── language-context.tsx      # Context com URL-based routing
+
+hooks/
+├── use-locale.ts             # Hook para acessar locale
+├── use-localized-router.ts   # Hook para gerar paths com locale
+└── ...
+
+middleware.ts                 # Middleware para redirecionar rotas
+```
 
 ## Como Adicionar Novas Traduções
 
 1. Abra `lib/translations.ts`
-2. Adicione a nova chave no objeto `en`
-3. Adicione a tradução correspondente no objeto `pt`
-4. Use no componente com: `t.secao.chave`
-
-Exemplo:
+2. Adicione a chave em ambos os idiomas (en e ptbr)
+3. Use no componente:
 ```typescript
-// em translations.ts
-en: {
-  hero: {
-    title: "New Title",
-    // ...
-  },
-}
-
-pt: {
-  hero: {
-    title: "Novo Título",
-    // ...
-  },
-}
-
-// no componente
+const { t } = useLanguage()
 <h1>{t.hero.title}</h1>
 ```
 
 ## Informações Técnicas
 
-- **React Hooks**: useState, useContext, useEffect
-- **Next.js**: "use client" directive para componentes cliente
-- **localStorage**: Para persistência de preferência de idioma
-- **Context API**: Para estado global de idioma
-- Nenhuma biblioteca externa de tradução (i18n, react-i18next, etc.)
+- **Framework**: Next.js 16.1.6 com App Router
+- **Routing**: Dynamic routes com `[locale]`
+- **State Management**: Context API
+- **Internacionalização**: sem bibliotecas externas
+- **Static Generation**: `generateStaticParams()` para `/en` e `/ptbr`
+- **Middleware**: Para redirecionamento automático de rotas
 
-## Browser Storage
+## Mudanças de URL
 
-As preferências são armazenadas em localStorage com a chave `"language"` contendo:
-- `"en"` para inglês
-- `"pt"` para português
+Rotas geradas automaticamente:
+- `/en` - Página em inglês
+- `/ptbr` - Página em português
+- `/` - Redireciona para `/en` (padrão)
 
-## Componentes Touchpoints do Idioma
+## Componentes Localizados
 
-- Header (botão de troca)
-- Todos os textos estáticos da página
-- Os dados de projetos mantêm seu idioma original (não foram traduzidos por serem dados específicos)
-
-## Sugestões Futuras
-
-- Detectar idioma do navegador automaticamente na primeira visita
-- Adicionar mais idiomas facilmente (espanhol, francês, etc.)
-- Criar página de configurações de idioma
-- Traduzir páginas dinâmicas e dados dos projetos se necessário
+Todos os componentes foram atualizados para usar `useLanguage()`:
+- ✅ Header (com botão de troca de idioma)
+- ✅ Hero
+- ✅ Services
+- ✅ Process
+- ✅ Differentials
+- ✅ About
+- ✅ CTA
+- ✅ Footer
+- ✅ TrustStrip
+- ✅ Projects

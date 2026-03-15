@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Space_Grotesk, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { LanguageProvider } from '@/contexts/language-context'
-import './globals.css'
+import '../globals.css'
 
 const spaceGrotesk = Space_Grotesk({ 
   subsets: ["latin"],
@@ -37,15 +37,24 @@ export const metadata: Metadata = {
   },
 }
 
+export function generateStaticParams() {
+  return [
+    { locale: 'en' },
+    { locale: 'ptbr' },
+  ]
+}
+
 export default function RootLayout({
   children,
-}: Readonly<{
+  params,
+}: {
   children: React.ReactNode
-}>) {
+  params: { locale: string }
+}) {
   return (
-    <html lang="en">
+    <html lang={params.locale === 'ptbr' ? 'pt-BR' : 'en'}>
       <body className={`${spaceGrotesk.variable} ${inter.variable} font-sans antialiased`}>
-        <LanguageProvider>
+        <LanguageProvider initialLocale={params.locale as 'en' | 'ptbr'}>
           {children}
         </LanguageProvider>
         <Analytics />

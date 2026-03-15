@@ -11,9 +11,8 @@ export function Footer() {
   const { t } = useLanguage()
 
   const social = [
-    { name: "GitHub", href: "#", icon: Github },
-    { name: "LinkedIn", href: "#", icon: Linkedin },
-    { name: "Twitter", href: "#", icon: Twitter },
+    { name: "GitHub", href: "https://github.com/vitorncordeiro", icon: Github },
+    { name: "LinkedIn", href: "https://linkedin.com/in/vitor-natal-cordeiro/", icon: Linkedin },
   ]
 
   return (
