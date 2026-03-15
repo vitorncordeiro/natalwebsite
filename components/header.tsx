@@ -45,7 +45,7 @@ export function Header() {
         >
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="text-xl font-bold tracking-tight text-foreground">
-              Digital<span className="text-primary">.</span>
+              Natal Sites<span className="text-primary">.</span>
             </span>
           </Link>
         </div>
