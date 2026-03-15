@@ -35,17 +35,12 @@ export function CTA() {
             <Button 
               size="lg" 
               className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-base font-medium group"
+              onClick={() => window.open("https://wa.me/5541987144723", "_blank")}
             >
               Start a conversation
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-accent-foreground/30 text-accent-foreground hover:bg-accent-foreground/10 px-8 py-6 text-base font-medium"
-            >
-              See my work
-            </Button>
+
           </div>
 
           <p 
