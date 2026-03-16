@@ -99,6 +99,43 @@ export const translations = {
     projects: {
       label: "Portfolio",
       title: "Selected Work",
+      items: [
+        {
+          title: "Aquazen Spas",
+          category: "Website & Automation",
+          description: "Complete website for scheduling a quote for bathtub and spa repairs",
+          tags: ["Booking", "Calculator", "Website", "Webhooks"],
+          image: "https://media.discordapp.net/attachments/662375257591513088/1482816525231456438/image.png?ex=69b85401&is=69b70281&hm=d3e5c7a744b1e88fbd0d633bc200c28bf40477297463fab68ebaea7c2048cfba&=&format=webp&quality=lossless&width=774&height=527",
+        },
+        {
+          title: "Alegria Pet Care",
+          category: "Website",
+          description: "Institutional website for a pet care company, featuring a modern design, responsive layout, and easy-to-navigate interface. The site includes sections for services, team, and contact information, resulting in a 25% increase in online inquiries.",
+          tags: ["Landing Page", "Website"],
+          image: "/projects/pet.png",
+        },
+        {
+          title: "AI Support Agent",
+          category: "AI Infrastructure",
+          description: "AI Support Agent that integrates with OpenAI's API to provide real-time customer support. The agent uses Retrieval-Augmented Generation (RAG) techniques to access a knowledge base and generate accurate responses, resulting in a 30% reduction in response time and improved customer satisfaction.",
+          tags: ["Sales", "CRM", "AI", "Integration"],
+          image: "/projects/dashboard.png",
+        },
+        {
+          title: "Electrical Engineering Company",
+          category: "Website",
+          description: "Institutional website for an electrical engineering company, featuring a modern design, responsive layout, and easy-to-navigate interface. The site includes sections for services, team, and contact information, resulting in a 25% increase in online inquiries.",
+          tags: ["Landing Page", "Website"],
+          image: "/projects/screen.png",
+        },
+        {
+          title: "SolarTech Energy",
+          category: "Website",
+          description: "Institutional website for a Solar Energy Company, with a modern look and a calculator that simulates the customer's savings over the years if they buy solar panels",
+          tags: ["Calculation", "Website", "Economic Simulation"],
+          image: "/projects/solar.png",
+        },
+      ],
     },
     
     // About Section
@@ -173,7 +210,7 @@ export const translations = {
       badge: "Engenharia Digital",
       title: "Engenharia de sistemas digitais que realmente funcionam",
       titleHighlight: "realmente funcionam",
-      description: "Eu design e construo websites modernos, sistemas de automação e infraestruturas de IA que ajudam empresas a operar de forma mais inteligente e escalar mais rápido.",
+      description: "Eu faço o design e construo websites modernos, sistemas de automação e infraestruturas de IA que ajudam empresas a operar de forma mais inteligente e escalar mais rápido.",
       ctaPrimary: "Iniciar um Projeto",
       ctaSecondary: "Ver Trabalhos",
     },
@@ -205,7 +242,7 @@ export const translations = {
     // Process Section
     process: {
       label: "Processo",
-      title: "Como funciono",
+      title: "Como funciona meu trabalho",
       steps: [
         {
           number: "01",
@@ -258,6 +295,43 @@ export const translations = {
     projects: {
       label: "Portfólio",
       title: "Trabalhos Selecionados",
+      items: [
+        {
+          title: "Aquazen Spas",
+          category: "Website & Automação",
+          description: "Plataforma completa de e-commerce para uma empresa de tecnologia em crescimento. Inclui sistema de gestão de pedidos automatizado, integração com gateways de pagamento, e painel administrativo em tempo real. Resultou em 40% de redução no tempo de processamento de pedidos.",
+          tags: ["Next.js", "Stripe", "PostgreSQL", "Webhooks"],
+          image: "https://media.discordapp.net/attachments/662375257591513088/1482816525231456438/image.png?ex=69b85401&is=69b70281&hm=d3e5c7a744b1e88fbd0d633bc200c28bf40477297463fab68ebaea7c2048cfba&=&format=webp&quality=lossless&width=774&height=527",
+        },
+        {
+          title: "Alegria Pet Care",
+          category: "Website",
+          description: "Website institucional para uma empresa de cuidados com animais de estimação, apresentando um design moderno, layout responsivo e interface fácil de navegar. O site inclui seções para serviços, equipe e informações de contato, resultando em um aumento de 25% nas consultas online.",
+          tags: ["Landing Page", "Website"],
+          image: "/projects/pet.png",
+        },
+        {
+          title: "Agente de Suporte IA",
+          category: "Infraestrutura de IA",
+          description: "Agente de Suporte de IA que se integra à API OpenAI para fornecer suporte ao cliente em tempo real. O agente usa técnicas de Geração Aumentada por Recuperação (RAG) para acessar uma base de conhecimento e gerar respostas precisas, resultando em uma redução de 30% no tempo de resposta e satisfação melhorada do cliente.",
+          tags: ["Vendas", "CRM", "IA", "Integração"],
+          image: "/projects/dashboard.png",
+        },
+        {
+          title: "Empresa de Engenharia Elétrica",
+          category: "Website",
+          description: "Website institucional para uma empresa de engenharia elétrica, apresentando um design moderno, layout responsivo e interface fácil de navegar. O site inclui seções para serviços, equipe e informações de contato, resultando em um aumento de 25% nas consultas online.",
+          tags: ["Landing Page", "Website"],
+          image: "/projects/screen.png",
+        },
+        {
+          title: "SolarTech Energy",
+          category: "Website",
+          description: "Website institucional para uma Empresa de Energia Solar, com um design moderno e uma calculadora que simula a economia do cliente ao longo dos anos se comprarem painéis solares",
+          tags: ["Cálculo", "Website", "Simulação Econômica"],
+          image: "/projects/solar.png",
+        },
+      ],
     },
     
     // About Section

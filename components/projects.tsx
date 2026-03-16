@@ -9,48 +9,11 @@ import { useLanguage } from "@/contexts/language-context"
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 
-const projects = [
-  {
-    title: "Aquazen Spas",
-    category: "Website & Automation",
-    description: "Plataforma completa de e-commerce para uma empresa de tecnologia em crescimento. Inclui sistema de gestao de pedidos automatizado, integracao com gateways de pagamento, e painel administrativo em tempo real. Resultou em 40% de reducao no tempo de processamento de pedidos.",
-    tags: ["Next.js", "Stripe", "PostgreSQL", "Webhooks"],
-    image: "https://media.discordapp.net/attachments/662375257591513088/1482816525231456438/image.png?ex=69b85401&is=69b70281&hm=d3e5c7a744b1e88fbd0d633bc200c28bf40477297463fab68ebaea7c2048cfba&=&format=webp&quality=lossless&width=774&height=527",
-  },
-  {
-    title: "Alegria Pet Care",
-    category: "Website",
-    description: "Institutional website for a pet care company, featuring a modern design, responsive layout, and easy-to-navigate interface. The site includes sections for services, team, and contact information, resulting in a 25% increase in online inquiries.",
-    tags: ["Landing Page", "Website"],
-    image: "/projects/pet.png",
-  },
-  {
-    title: "AI Support Agent",
-    category: "AI Infrastructure",
-    description: "AI Support Agent that integrates with OpenAI's API to provide real-time customer support. The agent uses Retrieval-Augmented Generation (RAG) techniques to access a knowledge base and generate accurate responses, resulting in a 30% reduction in response time and improved customer satisfaction.",
-    tags: ["Sales", "CRM", "AI", "Integration"],
-    image: "/projects/dashboard.png",
-  },
-  {
-    title: "Electrical Engineering Company",
-    category: "Website",
-    description: "Institutional website for an electrical engineering company, featuring a modern design, responsive layout, and easy-to-navigate interface. The site includes sections for services, team, and contact information, resulting in a 25% increase in online inquiries.",
-    tags: ["Landing Page", "Website"],
-    image: "/projects/screen.png",
-  },
-    {
-    title: "SolarTech Energy",
-    category: "Website",
-    description: "Institutional website for a Solar Energy Company, with a modern look and a calculator that simulates the customer's savings over the years if they buy solar panels",
-    tags: ["Calculation", "Website", "Economic Simulation"],
-    image: "/projects/solar.png",
-  },
-]
-
 export function Projects() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.3 })
   const { ref: carouselRef, isVisible: carouselVisible } = useScrollAnimation<HTMLDivElement>({ threshold: 0.05 })
   const { t } = useLanguage()
+  const projects = t.projects.items
 
   return (
     <section id="work" className="py-24 sm:py-32 bg-muted/30">
