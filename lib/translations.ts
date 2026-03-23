@@ -105,7 +105,7 @@ export const translations = {
           category: "Website & Automation",
           description: "Complete website for scheduling a quote for bathtub and spa repairs",
           tags: ["Booking", "Calculator", "Website", "Webhooks"],
-          image: "https://media.discordapp.net/attachments/662375257591513088/1482816525231456438/image.png?ex=69b85401&is=69b70281&hm=d3e5c7a744b1e88fbd0d633bc200c28bf40477297463fab68ebaea7c2048cfba&=&format=webp&quality=lossless&width=774&height=527",
+          image: "/projects/image.jpg",
         },
         {
           title: "Alegria Pet Care",
